@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حساب المعدل - هندسة كهربائية</title>
+
+<style>
+:root{
+    --primary:#00a86b;
+    --bg1:#0f172a;
+    --bg2:#1e293b;
+    --card:rgba(255,255,255,0.08);
+    --border:rgba(255,255,255,0.15);
+    --text:#e5e7eb;
+}
+
+body{
+    margin:0;
+    font-family:system-ui,Segoe UI,Tahoma;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    color:var(--text);
+}
+
+/* container */
+.container{
+    max-width:1100px;
+    margin:40px auto;
+    padding:25px;
+}
+
+/* header */
+h1{
+    text-align:center;
+    margin-bottom:10px;
+    font-size:26px;
+    color:white;
+}
+
+.description{
+    text-align:center;
+    opacity:.8;
+    margin-bottom:25px;
+}
+
+/* card */
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    backdrop-filter:blur(12px);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
+
+/* table */
+table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:12px;
+}
+
+th{
+    background:rgba(0,168,107,0.8);
+    padding:12px;
+    font-size:14px;
+}
+
+td{
+    padding:10px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+tr:hover{
+    background:rgba(255,255,255,0.05);
+}
+
+/* inputs */
+input{
+    width:90px;
+    padding:6px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(0,0,0,0.2);
+    color:white;
+    text-align:center;
+    outline:none;
+}
+
+/* button */
+.btn{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#00a86b,#00d084);
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:scale(1.02);
+}
+
+/* result */
+.results{
+    margin-top:20px;
+    display:grid;
+    gap:10px;
+}
+
+.result-box{
+    background:rgba(255,255,255,0.06);
+    padding:15px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.result-val{
+    color:#00d084;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* footer */
+footer{
+    text-align:center;
+    margin-top:20px;
+    opacity:.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>📊 حساب المعدل - هندسة كهربائية</h1>
+<p class="description">أدخل علاماتك واحصل على المعدل مباشرة بطريقة احترافية</p>
+
+<div class="card">
+
+<table>
+<thead>
+<tr>
+<th>المادة</th>
+<th>CC</th>
+<th>الامتحان</th>
+<th>المعامل</th>
+<th>المعدل</th>
+</tr>
+</thead>
+
+<tbody id="subjects-body">
+
+<tr class="subject-row" data-type="mix">
+<td>Théorie du signal</td>
+<td><input class="cc-input" type="number"></td>
+<td><input class="exam-input" type="number"></td>
+<td><input class="coef-input" value="2" readonly></td>
+<td class="sub-average">-</td>
+</tr>
+
+<tr class="subject-row" data-type="mix">
+<td>Logique combinatoire</td>
+<td><input class="cc-input" type="number"></td>
+<td><input class="exam-input" type="number"></td>
+<td><input class="coef-input" value="2" readonly></td>
+<td class="sub-average">-</td>
+</tr>
+
+<tr class="subject-row" data-type="mix">
+<td>Méthodes numériques</td>
+<td><input class="cc-input" type="number"></td>
+<td><input class="exam-input" type="number"></td>
+<td><input class="coef-input" value="2" readonly></td>
+<td class="sub-average">-</td>
+</tr>
+
+<tr class="subject-row" data-type="mix">
+<td>Electrotechnique</td>
+<td><input class="cc-input" type="number"></td>
+<td><input class="exam-input" type="number"></td>
+<td><input class="coef-input" value="3" readonly></td>
+<td class="sub-average">-</td>
+</tr>
+
+<tr class="subject-row" data-type="mix">
+<td>Mesures électriques</td>
+<td><input class="cc-input" type="number"></td>
+<td><input class="exam-input" type="number"></td>
+<td><input class="coef-input" value="2" readonly></td>
+<td class="sub-average">-</td>
+</tr>
+
+</tbody>
+</table>
+
+<button class="btn" onclick="calculateAll()">احسب المعدل</button>
+
+<div class="results">
+<div class="result-box">
+معدل السداسي: <span id="semester-avg" class="result-val">-</span>
+</div>
+
+<div class="result-box">
+المعاملات: <span id="total-coefs" class="result-val">-</span>
+</div>
+
+<div class="result-box">
+المعدل السنوي: <span id="annual-avg" class="result-val">-</span>
+</div>
+</div>
+
+</div>
+
+<footer>
+من إنشاء <b>عبدو</b>
+</footer>
+</div>
+
+<script>
+function calculateAll(){
+    let rows=document.querySelectorAll(".subject-row");
+    let total=0,coefs=0;
+
+    rows.forEach(r=>{
+        let type=r.dataset.type;
+        let coef=parseFloat(r.querySelector(".coef-input").value);
+
+        let avg=0;
+
+        let cc=r.querySelector(".cc-input")?.value || 0;
+        let exam=r.querySelector(".exam-input")?.value || 0;
+
+        if(type==="mix"){
+            avg=(cc*0.4)+(exam*0.6);
+        }
+
+        r.querySelector(".sub-average").innerText=avg.toFixed(2);
+
+        total+=avg*coef;
+        coefs+=coef;
+    });
+
+    let semAvg=total/coefs;
+
+    document.getElementById("semester-avg").innerText=semAvg.toFixed(2);
+    document.getElementById("total-coefs").innerText=coefs;
+
+    document.getElementById("annual-avg").innerText=semAvg.toFixed(2);
+}
+</script>
+
+</body>
+</html>

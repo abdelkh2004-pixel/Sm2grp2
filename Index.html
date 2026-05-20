@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#008b74">
+
+    <title>حاسبة معدل السداسي الرابع</title>
+
+    <style>
+        :root {
+            --main: #008b74;
+            --main-dark: #006b59;
+            --bg: #f2f6f5;
+            --white: #ffffff;
+            --text: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 15px;
+            background: var(--bg);
+            font-family: "Segoe UI", sans-serif;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: var(--white);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--main);
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th {
+            background: var(--main);
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        .subject-name {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 90px;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--main);
+        }
+
+        .result {
+            font-weight: bold;
+            color: var(--main);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .calc-btn {
+            background: var(--main);
+            color: white;
+        }
+
+        .calc-btn:hover {
+            background: var(--main-dark);
+        }
+
+        .reset-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #c0392b;
+        }
+
+        .results-box {
+            margin-top: 25px;
+            background: #eefaf7;
+            border-right: 5px solid var(--main);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .result-item {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .big-result {
+            color: var(--main);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .footer span {
+            color: var(--main);
+        }
+
+        @media (max-width: 700px) {
+            h1 {
+                font-size: 22px;
+            }
+
+            .result-item {
+                font-size: 16px;
+            }
+
+            .big-result {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>حاسبة معدل السداسي الرابع</h1>
+
+        <p class="description">
+            أدخل العلامات وسيتم حساب المعدل تلقائيًا
+        </p>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>المادة</th>
+                        <th>CC</th>
+                        <th>Exam</th>
+                        <th>المعامل</th>
+                        <th>المعدل</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr class="subject-row" data-type="mix">
+                        <td class="subject-name">Théorie du signal</td>
+                        <td><input type="number" class="cc"></td>
+                        <td><input type="number" class="exam"></td>
+                        <td>2</td>
+                        <td class="result">0</td>
+                    </tr>
+
+                    <tr class="subject-row" data-type="mix">
+                        <td class="subject-name">Electrotechnique Fondamentale 2</td>
+                        <td><input type="number" class="cc"></td>
+                        <td><input type="number" class="exam"></td>
+                        <td>3</td>
+                        <td class="result">0</td>
+                    </tr>
+
+                    <tr class="subject-row" data-type="single">
+                        <td class="subject-name">TP Électrotechnique</td>
+                        <td><input type="number" class="cc"></td>
+                        <td>—</td>
+                        <td>1</td>
+                        <td class="result">0</td>
+                    </tr>
+
+                    <tr class="subject-row" data-type="exam-only">
+                        <td class="subject-name">Sécurité électrique</td>
+                        <td>—</td>
+                        <td><input type="number" class="exam"></td>
+                        <td>1</td>
+                        <td class="result">0</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="buttons">
+            <button class="calc-btn" onclick="calculate()">حساب المعدل</button>
+            <button class="reset-btn" onclick="resetAll()">إعادة تعيين</button>
+        </div>
+
+        <div class="results-box">
+
+            <div class="result-item">
+                معدل السداسي:
+                <span id="semesterAvg" class="big-result">0.00</span>
+            </div>
+
+            <div class="result-item">
+                معدل السداسي الثالث:
+                <input type="number" id="s3" style="width:100px;">
+            </div>
+
+            <div class="result-item">
+                المعدل السنوي:
+                <span id="annualAvg" class="big-result">0.00</span>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            تم التطوير بواسطة <span>عبدو</span>
+        </div>
+
+    </div>
+
+    <script>
+
+        const inputs = document.querySelectorAll("input");
+
+        inputs.forEach(input => {
+            input.addEventListener("input", () => {
+
+                if (input.value > 20) {
+                    input.value = 20;
+                }
+
+                if (input.value < 0) {
+                    input.value = 0;
+                }
+
+                calculate();
+            });
+        });
+
+        function calculate() {
+
+            let rows = document.querySelectorAll(".subject-row");
+
+            let total = 0;
+            let coefTotal = 0;
+
+            rows.forEach(row => {
+
+                let type = row.dataset.type;
+
+                let cc = parseFloat(row.querySelector(".cc")?.value) || 0;
+                let exam = parseFloat(row.querySelector(".exam")?.value) || 0;
+
+                let coef = parseFloat(row.children[3].innerText);
+
+                let avg = 0;
+
+                if (type === "mix") {
+                    avg = (cc * 0.4) + (exam * 0.6);
+                }
+
+                else if (type === "single") {
+                    avg = cc;
+                }
+
+                else {
+                    avg = exam;
+                }
+
+                row.querySelector(".result").innerText = avg.toFixed(2);
+
+                total += avg * coef;
+
+                coefTotal += coef;
+
+            });
+
+            let semester = total / coefTotal;
+
+            document.getElementById("semesterAvg").innerText = semester.toFixed(2);
+
+            let s3 = parseFloat(document.getElementById("s3").value);
+
+            if (!isNaN(s3)) {
+
+                let annual = (semester + s3) / 2;
+
+                document.getElementById("annualAvg").innerText = annual.toFixed(2);
+
+            }
+
+        }
+
+        function resetAll() {
+
+            document.querySelectorAll("input").forEach(input => {
+                input.value = "";
+            });
+
+            document.querySelectorAll(".result").forEach(r => {
+                r.innerText = "0";
+            });
+
+            document.getElementById("semesterAvg").innerText = "0.00";
+            document.getElementById("annualAvg").innerText = "0.00";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
